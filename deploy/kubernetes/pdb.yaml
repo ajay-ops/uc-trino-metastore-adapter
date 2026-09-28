@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: uc-trino-metastore-adapter
+spec:
+  # POC: allow voluntary eviction of the single replica. Production: >=2 replicas, minAvailable: 1.
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: uc-trino-metastore-adapter

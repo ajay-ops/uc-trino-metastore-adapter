@@ -1,0 +1,32 @@
+{
+  "tableName": "events",
+  "dbName": "raw",
+  "owner": "",
+  "createTime": 0,
+  "lastAccessTime": 0,
+  "retention": 0,
+  "sd": {
+    "cols": [],
+    "location": "s3://sanitized-bucket/a b/%20/events/",
+    "inputFormat": "",
+    "outputFormat": "",
+    "compressed": false,
+    "numBuckets": 0,
+    "serdeInfo": {
+      "name": "events",
+      "serializationLib": "",
+      "parameters": {"path": "s3://sanitized-bucket/a b/%20/events/"}
+    },
+    "bucketCols": [],
+    "sortCols": [],
+    "parameters": {}
+  },
+  "partitionKeys": [],
+  "parameters": {"spark.sql.sources.provider": "DELTA"},
+  "viewOriginalText": "",
+  "viewExpandedText": "",
+  "tableType": "EXTERNAL_TABLE",
+  "temporary": false,
+  "ownerType": "USER",
+  "writeId": -1
+}

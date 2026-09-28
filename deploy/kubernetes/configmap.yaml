@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: uc-trino-metastore-adapter
+  labels:
+    app.kubernetes.io/name: uc-trino-metastore-adapter
+data:
+  # UC_BASE_URL and UC_CATALOG belong in the externally managed
+  # uc-trino-metastore-environment ConfigMap, not this defaults manifest.
+  THRIFT_ADDR: ':9083'
+  HTTP_ADDR: ':8080'
+  UC_CONNECT_TIMEOUT: 1s
+  UC_REQUEST_TIMEOUT: 3s
+  UC_OPERATION_TIMEOUT: 10s
+  RETRY_MAX_ATTEMPTS: '2'
+  RETRY_INITIAL_BACKOFF: 100ms
+  RETRY_MAX_BACKOFF: 1s
+  CACHE_TTL: 0s
+  CACHE_MAX_ENTRIES: '1000'
+  LOG_LEVEL: info
+  SHUTDOWN_TIMEOUT: 15s

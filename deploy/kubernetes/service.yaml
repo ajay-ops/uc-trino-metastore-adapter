@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: uc-trino-metastore
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: uc-trino-metastore-adapter
+  ports:
+    - name: thrift
+      port: 9083
+      targetPort: thrift
+    - name: http
+      port: 8080
+      targetPort: http

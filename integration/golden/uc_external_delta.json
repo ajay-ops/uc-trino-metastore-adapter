@@ -1,0 +1,18 @@
+{
+  "name": "events",
+  "catalog_name": "configured",
+  "schema_name": "raw",
+  "table_type": "EXTERNAL",
+  "data_source_format": "DELTA",
+  "storage_location": "s3://sanitized-bucket/a b/%20/events/",
+  "comment": "Synthetic Delta fixture",
+  "owner": "ignored-owner",
+  "columns": [{"name": "stale_uc_column", "type_text": "string", "partition_index": 0}],
+  "properties": {
+    "spark.sql.sources.provider": "AVRO",
+    "avro.schema.literal": "must not leak",
+    "transactional": "true",
+    "trino.spark.delta.table.schema": "stale schema",
+    "path": "s3://wrong-bucket/"
+  }
+}

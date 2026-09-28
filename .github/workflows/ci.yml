@@ -1,0 +1,37 @@
+name: Go
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.27.1'
+          cache: true
+      - run: ./scripts/verify.sh
+      - run: make race
+      - run: make build
+  generated:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.27.1'
+      - name: Install pinned compiler
+        run: |
+          docker pull thrift:0.24.0
+          mkdir -p "$RUNNER_TEMP/thrift-bin"
+          cat > "$RUNNER_TEMP/thrift-bin/thrift" <<'SCRIPT'
+          #!/bin/sh
+          exec docker run --rm --entrypoint thrift --user "$(id -u):$(id -g)" -v "$PWD:$PWD" -v "${TMPDIR:-/tmp}:${TMPDIR:-/tmp}" -w "$PWD" thrift:0.24.0 "$@"
+          SCRIPT
+          chmod +x "$RUNNER_TEMP/thrift-bin/thrift"
+          echo "$RUNNER_TEMP/thrift-bin" >> "$GITHUB_PATH"
+      - run: ./scripts/verify.sh-generated
+      - run: ./scripts/build-image.sh uc-trino-metastore-adapter ci-test
