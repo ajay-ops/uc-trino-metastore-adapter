@@ -1,5 +1,9 @@
 # UC Trino Metastore Adapter
 
+For teaching the end-to-end code and connectivity flow, use the
+[short walkthrough](docs/CODE_WALKTHROUGH_SHORT.md) or the
+[detailed walkthrough](docs/CODE_WALKTHROUGH_DETAILED.md).
+
 A stateless Go service being built to bridge Trino's HMS Thrift metadata protocol
 to OSS Unity Catalog. The official Trino Delta connector remains responsible for
 Delta logs and Parquet. No Hive Metastore service or HMS database is required by
